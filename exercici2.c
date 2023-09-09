@@ -30,7 +30,6 @@ int statistics(int *array, int *max, int *min, int userInput)
         // assignem el nou maxim i el nou minim
         if (array[j] > *max) *max = array[j];
         if (array[j] < *min) *min = array[j];
-        printf("\nItem llegit: %d", array[j]);
         sumaArray += array[j];
         j++;
     }
