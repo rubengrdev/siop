@@ -20,6 +20,23 @@ void main()
     {
         execlp("./child", cmd, NULL);
     }
-    
 
+    while ((wait(&stat) > 0))
+    {
+
+        if (WIFEXITED(stat))
+        {
+            exitstat = WEXITSTATUS(stat);
+            // en el caso de que en WEXITSTATUS(stat) yo reciba un 0, todo ha ido bien, si stat recibe un 255 significará que el exit de replicant ha sido -1
+            if (exitstat == 255)
+            {
+                exitstat = -1;
+            }
+        }
+
+        if (WIFSIGNALED(stat))
+        {
+            psignal(WTERMSIG(stat), "Forzando cierre del proceso");
+        }
+    }
 }
