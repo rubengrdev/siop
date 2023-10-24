@@ -1,0 +1,5 @@
+*** DUMMY: Opening MASTER dummy file ... [OK]
+
+Usage: Los parametros introducidos no son correctos. Ha introducido 5 valores. Parametros necesarios: 3
+
+Usage: el programa ha fallado, faltan parámetros. Ejemplo de uso: ./TT 1000>0 2000>0
