@@ -8,10 +8,11 @@
 
 void main(int argc, char *argv[])
 {
-    int num, pid, child_pid, exitstat, stat;
+    int num, pid, child_pid, exitstat, stat, wait_thispid;
+    bool bg = false;
     char cmd[MAX];
     bool background = false;
-    
+
     while (1)
     {
         num = scanf("%s", cmd);
@@ -21,27 +22,39 @@ void main(int argc, char *argv[])
         {
             exit(0);
         }
+        printf("\npre: %c\n", cmd[num]);
+        if (cmd[num - 1] == '&')
+        {
+            
+            cmd[num - 1] = '\0'; // eliminem &
+            
+            bg = true;
+        }
         else
         {
-            if (cmd[num - 1] == '&')
-            {
-                cmd[num - 1] = '\0'; // eliminem &
-            }
+            bg = false;
         }
 
         pid = fork();
         if (pid == 0)
         {
             child_pid = getpid();
-            printf("\nExecutant %s amb PID = %d\n", argv[0], child_pid);
+            if (bg)
+            {
+                printf("\nExecutant en bg %s amb PID = %d\n", argv[0], child_pid);
+                wait_thispid = child_pid;
+            }
+            if (!bg)
+            {
+                printf("\nExecutant %s amb PID = %d\n", argv[0], child_pid);
+            }
+
             execlp(cmd, cmd, NULL);
         }
         else
         {
-            
-            while ((wait(&stat) > 0))
+            while (wait(&stat) > 0)
             {
-
                 if (WIFEXITED(stat))
                 {
                     exitstat = WEXITSTATUS(stat);
@@ -57,6 +70,23 @@ void main(int argc, char *argv[])
                     psignal(WTERMSIG(stat), "Forzando cierre del proceso");
                 }
             }
+            /*
+             while ((waitpid(child_pid ,&stat, WNOHANG) > 0))
+             {
+
+                 if (WIFEXITED(stat))
+                 {
+                     exitstat = WEXITSTATUS(stat);
+                     // en el caso de que en WEXITSTATUS(stat) yo reciba un 0, todo ha ido bien, si stat recibe un 255 significará que el exit de replicant ha sido -1
+                     if (exitstat == 255)
+                     {
+                         exitstat = -1;
+                     }
+                     printf("El proceso %d termina con exit code %d\n", child_pid, exitstat);
+                 }
+
+             }
+             */
         }
     }
 }
