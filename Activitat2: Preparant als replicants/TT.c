@@ -6,8 +6,8 @@
 #include <sys/wait.h>
 #include <stdlib.h>
 
-#define TEAMNAME "FOOFIGHTER"
-#define ENIGMA1 ""
+#define TEAMNAME "RUBENGOMEZ"
+#define ENIGMA1 "chmod rw codex"
 
 void usage(char *str[])
 {
@@ -41,26 +41,18 @@ void main(int args, char *argv[])
             close(0); // cerramos entrada 0
             // duda para preguntar en clase, el close o dup pueden fallar?
             dup(fd); // hace que 0 apunte a fd
-            execlp("./replicant", argv[2], NULL);
+            execlp("./replicant", "replicant", argv[2],(char*) NULL);
         }
     }
 
     // después de que se hayan ejecutado los hijos, el padre esperará a que terminen
-    while ((wait(&stat) >= 0))
+    while ((wait(&stat) >0))
     {
-
-        if (WIFEXITED(stat) < 255)
-        {
             exitstat = WEXITSTATUS(stat);
             printf("\nexitstat = %d", exitstat);
             acum += exitstat;
             printf("\nAcum = %d", acum);
             dummy_test(acum, ENIGMA1, TEAMNAME);
-        }
-        else
-        {
-            printf("\nError, un proceso no ha acabado bien");
-        }
     }
 }
 
