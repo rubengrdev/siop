@@ -9,9 +9,8 @@
 int main(int args, char *argv[])
 {
 
-    int N = atoi(argv[0]), MAX_BUFFER = 2000, bytes_leidos, dummy_cmp;
+    int N = atoi(argv[0]), MAX_BUFFER = 2000, bytes_leidos = 1, dummy_cmp = 0;
     char *buffer;
-    bool final = false;
     // printf("\nreplicant.c, N =%d", atoi(argv[0]));
     if (N >= 0 && N <= MAX_BUFFER)
     {
@@ -21,9 +20,13 @@ int main(int args, char *argv[])
         while (bytes_leidos > 0)
         {
             bytes_leidos = read(0, buffer, N);
+            //printf("\nbytes leidos: %d & N: %d", bytes_leidos, N);
             dummy_cmp = dummy_comp(buffer, N);
         }
-        
         dummy_exit();
+    }
+    else
+    {
+        exit(-1);
     }
 }

@@ -6,7 +6,7 @@
 #include <sys/wait.h>
 #include <stdlib.h>
 
-#define TEAMNAME "FOOFIGHTERS"
+#define TEAMNAME "FOOFIGHTER"
 #define ENIGMA1 ""
 
 void usage(char *str[])
@@ -31,7 +31,6 @@ void main(int args, char *argv[])
 
     m = atoi(argv[1]);
     n = atoi(argv[2]);
-
     for (i = 0; i < m; i++)
     {
         pid = fork();
@@ -50,18 +49,17 @@ void main(int args, char *argv[])
     while ((wait(&stat) >= 0))
     {
 
-        printf("\nStatus = %d", stat);
-        if (WIFEXITED(stat))
+        if (WIFEXITED(stat) < 255)
         {
             exitstat = WEXITSTATUS(stat);
+            printf("\nexitstat = %d", exitstat);
             acum += exitstat;
             printf("\nAcum = %d", acum);
             dummy_test(acum, ENIGMA1, TEAMNAME);
         }
-
-        if (WIFSIGNALED(stat))
+        else
         {
-            psignal(WTERMSIG(stat), "Forzando cierre del proceso");
+            printf("\nError, un proceso no ha acabado bien");
         }
     }
 }
