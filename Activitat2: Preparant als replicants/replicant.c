@@ -21,12 +21,11 @@ int main(int args, char *argv[])
         while (bytes_leidos > 0)
         {
             // bytes_leidos tiene que ser igual a N, de lo contrario no funcionará la comparativa
-            if (bytes_leidos == N)
+            if (bytes_leidos == N || bytes_leidos > 0)
             {
                 dummy_cmp = dummy_comp(buffer, bytes_leidos);
-                printf("\nbytes_leidos: %d, N: %d", bytes_leidos, N);
+                printf("\nBytes Leidos: %d, N: %d", bytes_leidos, N);
             }
-
             bytes_leidos = read(0, buffer, N);
         }
         dummy_exit();

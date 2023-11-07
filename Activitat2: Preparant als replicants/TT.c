@@ -7,7 +7,7 @@
 #include <stdlib.h>
 
 #define TEAMNAME "RUBENGOMEZ"
-#define ENIGMA1 "chmod g+rw codex"
+#define ENIGMA1 "chmod g rw codex"
 
 void usage(char *str[])
 {
