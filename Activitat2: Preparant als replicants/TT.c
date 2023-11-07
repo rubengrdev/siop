@@ -7,7 +7,7 @@
 #include <stdlib.h>
 
 #define TEAMNAME "RUBENGOMEZ"
-#define ENIGMA1 "chmod g-rw- codex"
+#define ENIGMA1 "chmod g+rw codex"
 
 void usage(char *str[])
 {
@@ -41,18 +41,19 @@ void main(int args, char *argv[])
             close(0); // cerramos entrada 0
             // duda para preguntar en clase, el close o dup pueden fallar?
             dup(fd); // hace que 0 apunte a fd
-            execlp("./replicant", "replicant", argv[2],(char*) NULL);
+            execlp("./replicant", "replicant", argv[2], (char *)NULL);
         }
     }
 
     // después de que se hayan ejecutado los hijos, el padre esperará a que terminen
-    while ((wait(&stat) >0))
+    while ((wait(&stat) > 0))
     {
-            exitstat = WEXITSTATUS(stat);
-            printf("\nexitstat = %d", exitstat);
-            acum += exitstat;
-            printf("\nAcum = %d", acum);
-            dummy_test(acum, ENIGMA1, TEAMNAME);
+        exitstat = WEXITSTATUS(stat);
+        acum += exitstat;
+        dummy_test(acum, ENIGMA1, TEAMNAME);
+
+        printf("\nexitstat = %d", exitstat);
+        printf("\nAcum = %d", acum);
     }
 }
 
