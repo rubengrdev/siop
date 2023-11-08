@@ -20,7 +20,7 @@ void main(int argc, char *argv[])
         {
             i++;    //conta cada salt de linea amb num linea = i
         }
-        if (i % 2 == 0) //si residu de i/2 = 0, és un numero parell
+        if (i % 2 == 0 && i != 0) //si residu de i/2 = 0, és un numero parell
         {
             write(STDOUT_FILENO, &line, 1); //escricu per pantalla aquesta linea
         }

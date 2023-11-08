@@ -47,9 +47,9 @@ bool checkparams(int argc, char *argv[])
     {
         // comprueba los valores insertados por el usuario
         if (checkString(argv[1]) && checkString(argv[2]))
-        {   
-            //en el caso de este último ejercicio no puede ser el buffer > 2000
-            if (checkLimits(argv[1]) && checkLimits(argv[2]) && argv[2]< = 2000)
+        {
+            // en el caso de este último ejercicio no puede ser el buffer > 2000
+            if (checkLimits(argv[1]) && checkLimits(argv[2]))
             {
                 // todo correcto
                 // printf("\nLos valores introducidos '%s', '%s' se han verificado como numeros enteros (INT). Correcto.\n", argv[1], argv[2]);

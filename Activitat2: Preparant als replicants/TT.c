@@ -11,7 +11,7 @@
 
 void usage(char *str[])
 {
-    printf("\nUsage: el programa ha fallado, faltan parámetros. Ejemplo de uso: %s %s>0 %s>0\n", str[0], str[1], str[2]);
+    printf("\nUsage: el programa ha fallado, faltan parámetros. Ejemplo de uso: %s %s>0 %s>0<2000\n", str[0], str[1], str[2]);
     exit(-1);
 }
 
@@ -24,10 +24,10 @@ void main(int args, char *argv[])
     }
     else
     {
-        if (atoi(argv[1]) <= 0 || atoi(argv[2]) <= 0)
+        if (atoi(argv[1]) <= 0 || atoi(argv[2]) <= 0 || atoi(argv[2]) > 2000)
             usage(argv);
     }
-    
+
     fd = dummy_open();
     m = atoi(argv[1]);
     n = atoi(argv[2]);
