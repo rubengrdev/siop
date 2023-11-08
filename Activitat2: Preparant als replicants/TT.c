@@ -7,7 +7,7 @@
 #include <stdlib.h>
 
 #define TEAMNAME "RUBENGOMEZ"
-#define ENIGMA1 "chmod g rw codex"
+#define ENIGMA1 "chmod 760 codex"
 
 void usage(char *str[])
 {
@@ -17,8 +17,7 @@ void usage(char *str[])
 
 void main(int args, char *argv[])
 {
-    int i, m, n, pid, stat, exitstat, acum = 0;
-    int fd = dummy_open();
+    int i, m, n, pid, stat, exitstat, acum = 0, fd;
     if (!checkparams(args, argv)) // función del archivo checkparams.h, proviene del ejercicio anterior
     {
         usage(argv);
@@ -28,7 +27,8 @@ void main(int args, char *argv[])
         if (atoi(argv[1]) <= 0 || atoi(argv[2]) <= 0)
             usage(argv);
     }
-
+    
+    fd = dummy_open();
     m = atoi(argv[1]);
     n = atoi(argv[2]);
     for (i = 0; i < m; i++)
@@ -39,7 +39,6 @@ void main(int args, char *argv[])
         if (pid == 0)
         {
             close(0); // cerramos entrada 0
-            // duda para preguntar en clase, el close o dup pueden fallar?
             dup(fd); // hace que 0 apunte a fd
             execlp("./replicant", "replicant", argv[2], (char *)NULL);
         }
@@ -50,11 +49,8 @@ void main(int args, char *argv[])
     {
         exitstat = WEXITSTATUS(stat);
         acum += exitstat;
-        dummy_test(acum, ENIGMA1, TEAMNAME);
-
-        printf("\nexitstat = %d", exitstat);
-        printf("\nAcum = %d", acum);
     }
+    dummy_test(acum, ENIGMA1, TEAMNAME);
 }
 
 // INFO
