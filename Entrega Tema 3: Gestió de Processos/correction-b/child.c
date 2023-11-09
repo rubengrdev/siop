@@ -22,19 +22,18 @@ void main(int argc, char *argv[])
         {
             exit(0);
         }
-        printf("\npre: %c\n", cmd[num]);
+    
         if (cmd[num - 1] == '&')
         {
-            
+           // printf("\npre: %c\n", cmd[num]);
             cmd[num - 1] = '\0'; // eliminem &
-            
             bg = true;
         }
         else
         {
             bg = false;
         }
-
+        
         pid = fork();
         if (pid == 0)
         {
@@ -53,23 +52,40 @@ void main(int argc, char *argv[])
         }
         else
         {
-            while (wait(&stat) > 0)
+            if (bg)
             {
-                if (WIFEXITED(stat))
+                while (wait(&stat) > 0)
                 {
-                    exitstat = WEXITSTATUS(stat);
-                    // en el caso de que en WEXITSTATUS(stat) yo reciba un 0, todo ha ido bien, si stat recibe un 255 significará que el exit de replicant ha sido -1
-                    if (exitstat == 255)
+                    if (WIFEXITED(stat))
                     {
-                        exitstat = -1;
+                        exitstat = WEXITSTATUS(stat);
+                        // en el caso de que en WEXITSTATUS(stat) yo reciba un 0, todo ha ido bien, si stat recibe un 255 significará que el exit de replicant ha sido -1
+                        if (exitstat == 255)
+                        {
+                            exitstat = -1;
+                        }
+                        printf("El proceso %d termina con exit code %d\n", child_pid, exitstat);
                     }
-                    printf("El proceso %d termina con exit code %d\n", child_pid, exitstat);
-                }
-                if (WIFSIGNALED(stat))
-                {
-                    psignal(WTERMSIG(stat), "Forzando cierre del proceso");
+                    if (WIFSIGNALED(stat))
+                    {
+                        psignal(WTERMSIG(stat), "Forzando cierre del proceso");
+                    }
                 }
             }
+            else
+            {
+                while (wait(&stat) > 0)
+                {
+                    if (WIFEXITED(stat))
+                    {
+                        exitstat = WEXITSTATUS(stat);
+                        // en el caso de que en WEXITSTATUS(stat) yo reciba un 0, todo ha ido bien, si stat recibe un 255 significará que el exit de replicant ha sido -1
+                        printf("El proceso %d termina con exit code %d\n", child_pid, exitstat);
+                        
+                    }
+                }
+            }
+
             /*
              while ((waitpid(child_pid ,&stat, WNOHANG) > 0))
              {

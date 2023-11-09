@@ -1,0 +1,22 @@
+child
+child.c
+out
+out1
+procsShellv2
+procsShellv2.c
+    PID TTY          TIME CMD
+  12310 pts/1    00:00:00 bash
+  36747 pts/1    00:00:00 procsShellv2
+  36750 pts/1    00:00:00 child
+  36831 pts/1    00:00:00 ps
+ 12:10:31 up  1:20,  1 user,  load average: 2,56, 2,03, 1,90
+child
+child.c
+out
+out1
+procsShellv2
+procsShellv2.c
+El proceso 32556 termina con exit code 0
+El proceso 32556 termina con exit code 0
+El proceso 32556 termina con exit code 0
+El proceso 32556 termina con exit code 0

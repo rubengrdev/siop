@@ -1,0 +1,35 @@
+%./procsShellv2
+ls
+Executant ls amb PID=40516...
+Makefile f2.txt funcionsAux.h mygrep.c procsShell procsShellv1.c
+procsShellv2.c procsShellv3 sortida.txt
+f1.txt funcionsAux.c funcionsAux.o mygrepp.c procsShellv1
+procsShellv2 procsShellv2.o procsShellv3.c
+El proceso 40516 termina con exit code 0
+
+ps&
+Executant en bg ps amb PID=40523...
+   PID TTY          TIME CMD
+  12310 pts/1    00:00:00 bash
+  34222 pts/1    00:00:00 procsShellv2
+  34223 pts/1    00:00:00 child
+  34252 pts/1    00:00:00 ps
+
+
+
+uptime
+Executant uptime amb PID=40520...
+11:45:28 up 55 min,  1 user,  load average: 2,46, 1,76, 1,14
+El proceso 40520 termina con exit code 0
+
+ls&
+Executant en bg ls amb PID=40523...
+Makefile f2.txt funcionsAux.h mygrep.c procsShell procsShellv1.c
+procsShellv2.c procsShellv3 sortida.txt
+f1.txt funcionsAux.c funcionsAux.o mygrepp.c procsShellv1
+procsShellv2 procsShellv2.o procsShellv3.c
+
+exit
+
+El proceso 40519 termina con exit code 0
+El proceso 40523 termina con exit code 0
