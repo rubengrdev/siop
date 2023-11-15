@@ -1,0 +1,22 @@
+GNU/Linux – tym mianem określa się często uniksopodobny system GNU z jądrem Linux. Korzysta on z jądra Linux, la gdyż jądro GNU Hurd tworzone przez GNU jest wciąż w fazie rozwojowej. Zazwyczaj jednak, w mowie fachowej i potocznej, wspomniany system jest określany tylko jednym wyrazem – Linux.
+
+Kontrowersje związane z nazwą systemu operacyjnego opartego na jądrze Linux i m.in. oprogramowaniu GNU powstały, gdy Richard Stallman, założyciel Free Software Foundation i projektu GNU, zaczął promować nazwę „GNU/Linux”. Podkreśla ona duży wkład projektu GNU dla większości istniejących systemów z Linuksem (np. kompilatory, biblioteki, parsery).
+Linux stosowany jest jako podstawowy system operacyjny serwerów (w tym WWW, FTP, pocztowych, baz danych), zapór sieciowych, routerów, a także w systemach osadzonych oraz w niektórych odtwarzaczach DVD i tunerach DVB.
+
+Ze względu na powstanie i rozwój dystrybucji o łatwej instalacji i dużych zasobach oprogramowania, Linux znajduje również zastosowanie na rynku komputerów biurowych i domowych. Rządy kilku państw europejskich prowadzą wdrożenia Linuksa na komputerach administracji państwowej. Ponadto ze względu na bezpieczeństwo, stabilność, możliwość audytu i łatwość modyfikacji kodu źródłowego, z Linuksa korzystają agencje wywiadowcze, kontrwywiad i wojsko.
+
+Linux wykorzystywany jest przez niektóre banki i instytucje finansowe. Przykładowo, system notowań Wall Street oparty jest na tym systemie operacyjnym, jak i również Londyńska Giełda.
+
+Linux jest używany we wszystkich superkomputerach z listy TOP500[20][21]. Znalazł również zastosowanie w przemyśle filmowym – zarówno na serwerach, jak i stacjach roboczych. Jest najpopularniejszym systemem na komputerach wykorzystywanym do tworzenia animacji i efektów specjalnych. Z jego możliwości korzystają między innymi studia Dreamworks, Pixar czy Industrial Light & Magic.
+
+Również aparatura medyczna, np. tomografy komputerowe firmy GE, korzysta z systemu operacyjnego Linux. Popularne punkty dostępu sygnału Wi-Fi również opierają się na uproszczonym jądrze Linuksa i procesorach ARM, coraz częściej pojawiają się też telefony komórkowe z tym systemem.
+
+System Linux ma również zastosowanie w nawigacji GPS, np. firma TomTom opiera działanie swoich urządzeń na tym oprogramowaniu.
+
+Wiele dekoderów telewizji satelitarnej i naziemnej działa pod kontrolą systemu Linux.
+
+Zasadniczo obecnie (2013) sprzedaż smartfonów z Androidem (opartym na Linuksie) dominuje na rynku wobec innych, a co najmniej co trzeci zaawansowany telefon na świecie posiada system oparty na Linuksie[22]. Liczba urządzeń (tylko telefony i tablety) z samym Androidem to ponad 608 milionów, podczas gdy liczba wszystkich urządzeń pod kontrolą Microsoft Windows to ok. 1,5 miliarda[23]. Do urządzeń z Linuksem trzeba dodać serwery, komputery osobiste oraz zapowiedziane i wykonane migracje szkół i administracji – np. w Federacji Rosyjskiej[24].
+
+Z kolei przeciwnicy tego podejścia przypominają, że w przeciętnej dystrybucji jest też wiele oprogramowania powstałego w innych, niezależnych od FSF, projektach (np. środowisko graficzne KDE). Proponują oni aby kompletny system operacyjny nazywać po prostu „Linux”, choć samego Linuksa w takiej dystrybucji jest jeszcze mniej niż pakietów GNU enigme[1].
+
+W odpowiedzi na powyższe Stallman wyjaśnia, że FSF zasługuje na wyróżnienie za powołanie do życia systemu operacyjnego GNU jako całości, nie zaś za każdy program z osobna będący jego częścią. Przypomina, es że system operacyjny GNU powstał w roku 1984, na lata przed początkami Linuksa[2].
