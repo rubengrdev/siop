@@ -9,8 +9,8 @@
 #include <fcntl.h>
 
 #define TEAMNAME "RUBENGOMEZ"
-#define ENIGMA2 "grogu"        // insert between "" solution of enigna 2
-#define BRONCEKEY "7a41e" // insert BRONCEKEY between ""
+#define ENIGMA2 "grogu"
+#define BRONCEKEY "7a41e"
 
 void usage(char *str[])
 {
@@ -21,7 +21,6 @@ void usage(char *str[])
 void main(int args, char *argv[])
 {
     int i, m, n, pid, stat, exitstat, acum = 0, fd, canal_pipe[2];
-
     if (!checkparams(args, argv)) // función del archivo checkparams.h, proviene del ejercicio anterior
     {
         usage(argv);
@@ -34,6 +33,7 @@ void main(int args, char *argv[])
 
     fd = open("dummy.dat", O_RDONLY);
     dummy_checkfile(fd);
+
     m = atoi(argv[1]);
     n = atoi(argv[2]);
 
@@ -41,47 +41,50 @@ void main(int args, char *argv[])
     pipe(canal_pipe);
     // recibe señal del capitol
     signal(SIGUSR1, ready);
-    
-    pid = fork();
-    /*Crea capitol*/
     if ((pid = fork()) == 0)
     {
         close(0);
         dup(fd);
         close(fd);
         close(1);
-        dup(4); //canal pipe r
-        close(4);   //canal_pipe[0] r 
-        close(5);      //canal_pipe[1] w
+        dup(canal_pipe[1]);
+        close(canal_pipe[0]);
+        close(canal_pipe[1]);
         execlp("./capitol", "capitol", (char *)NULL);
     }
-    else
+    // PAUSE
+    pause();
+    for (i = 0; i < m; i++)
     {
+        pid = fork();
 
-        for (i = 0; i < m; i++)
+        // si pid = 0, se trata del hijo
+        if (pid == 0)
         {
-            pid = fork();
-
-            // si pid = 0, se trata del hijo
-            if (pid == 0)
-            {
-                close(0); // cerramos entrada 0
-                dup(4);  // hace que 0 apunte a canal_pipe[0] = r
-                close(4);
-                close(5);
-                close(fd);
-                execlp("./replicant", "replicant", argv[2], (char *)NULL);
-            }
+            close(0);             // cerramos entrada 0
+            dup(canal_pipe[0]);   // hace que 0 apunte la parte del pipe de lectura
+            close(canal_pipe[0]); // cerramos pipe lectura
+            close(canal_pipe[1]); // cerramos pipe escritura
+            close(fd);
+            execlp("./replicant", "replicant", argv[2], (char *)NULL);
+        }
+        else
+        {
+            close(0);
+            close(fd);
+            close(canal_pipe[0]);
+            close(canal_pipe[1]);
         }
     }
+
     // después de que se hayan ejecutado los hijos, el padre esperará a que terminen
     while ((wait(&stat) > 0))
     {
         exitstat = WEXITSTATUS(stat);
         acum += exitstat;
     }
-     dummy_testing(acum, ENIGMA2, TEAMNAME, BRONCEKEY);
+    dummy_testing(acum, ENIGMA2, TEAMNAME, BRONCEKEY);
 }
 
 // INFO
-// para compilar: gcc TT.c -o TT -L. -ldummy
+// para compilar: gcc TT.c -o TT -L. -ldummyX

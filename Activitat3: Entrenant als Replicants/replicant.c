@@ -1,4 +1,3 @@
-
 #include <stdio.h>
 #include <fcntl.h>
 #include <unistd.h>
@@ -9,7 +8,7 @@
 int main(int args, char *argv[])
 {
 
-    int N = atoi(argv[1]), MAX_BUFFER = 2000, bytes_leidos = 0, dummy_cmp = 0;
+    int N = atoi(argv[1]), MAX_BUFFER = 2000, bytes_leidos = 0, dummmy_calculate = 0;
     char *buffer;
 
     if (N > 0 && N <= MAX_BUFFER)
@@ -23,9 +22,10 @@ int main(int args, char *argv[])
             // bytes_leidos tiene que ser igual a N, de lo contrario no funcionará la comparativa
             if (bytes_leidos > 0)
             {
-                dummy_cmp = dummy_calc(buffer, bytes_leidos);
-                printf("\nBytes Leidos: %d, N: %d", bytes_leidos, N);
+                dummmy_calculate = dummy_calc(buffer, bytes_leidos);
+                // printf("\nBytes Leidos: %d, N: %d", bytes_leidos, N);
             }
+
             bytes_leidos = read(0, buffer, N);
         }
         dummy_end();
