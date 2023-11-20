@@ -1,0 +1,4 @@
+- exercici_pipes1.c: Comunicacio entres germans amb dos pipes una d'anada i l'altre de tornada pels canals estandard (correspon al exercici 1 de pipes transparencia 50)
+- exercici_pipes2.c: Comunicacio pare-fill en una cadena de (pare-fill-net etc...). Es comunicaran pels canals estandard de manera que el que escrigui el primer proces pugui ser enviat fins al darrer. (correspon al exercici 2 de pipes transparencia 50)
+- exercici_pipes3.c: Comunicacio del pare cap a tots els fills el pare escriura al canal de la pipe corresponent (una pipe per cada fill) i els fills llegiran de l'entrada estandard que sera l'entrada de la pipe.(correspon al exercici 3 de pipes transparencia 51)
+- exercici_pipes3_millor.c : es com l'exercici anterior pero l'execucio es concurrent, en l'anterior l'execucio queda serialitzada perque el pare envia l'informacio (el pid) a cada fill dins del mateix bucle de creacio de fills.
