@@ -5,35 +5,27 @@
 #include <stdlib.h>
 #include <string.h>
 
-char opcions(char lletra, unsigned int temp, int num_fill)
+char opcions(char lletra, unsigned int temp)
 {
-	if (num_fill == 0 && lletra == 'a')
+
+	if (lletra == 'a')
 	{
 		lletra = 'e';
 	}
 
-	if (num_fill == 1 && lletra == 'c')
+	if (lletra == 'c')
 	{
 		lletra = 'k';
 	}
 
-	if (num_fill == 2 && temp % 7 == 0)
+	if (temp % 7 == 0)
 	{
 		write(1, &lletra, sizeof(char));
 	}
 
-	if (num_fill == 3 && lletra == 'm')
+	if (lletra == 'm')
 	{
 		lletra = 'n';
-	}
-	if (num_fill > 4)
-	{
-		if (num_fill >= 10)
-		{
-			//de forma recursiva, si n_fill > 4, torna a començar al 1º fill i viceversa...
-			opcions(lletra, temp, num_fill - 4);
-		}
-		
 	}
 	return lletra;
 }
@@ -42,8 +34,7 @@ int main(int argc, char *argv[])
 {
 
 	int fd[2];
-	char buf[255];
-	int i = 0, num_fill;
+	int i;
 	pid_t childpid;
 	char c;
 	unsigned int count_lletres;
@@ -54,17 +45,14 @@ int main(int argc, char *argv[])
 		if ((childpid = fork()) == 0)
 		{ /* fill */
 			/* redirecciona l'entrada estandard a la pipe */
-			// prints del contador
-			// sprintf(buf, "%d", i);
-			// write(2, buf, strlen(buf));
 			close(0);
 			dup(fd[0]);
 			count_lletres = 1;
 			lenght = strlen(argv[1]);
-			num_fill = i - 1;
+
 			while (read(fd[0], &c, lenght) > 0)
 			{
-				c = opcions(c, count_lletres, num_fill);
+				c = opcions(c, count_lletres);
 				write(1, &c, sizeof(char));
 				count_lletres++;
 			}
@@ -79,12 +67,42 @@ int main(int argc, char *argv[])
 			dup(fd[1]);
 			close(fd[0]);
 			close(fd[1]);
-			// break;
+			break;
 		}
 	}
 	while (read(0, &c, sizeof(c)) > 0)
 	{
 		write(1, &c, sizeof(c));
 	}
+
 	wait(NULL);
+}
+
+int main()
+{
+	char c;
+	int j = 1;
+	while (read(0, &c, 1) > 0)
+	{
+		switch (i % 4)
+		{
+		case 0:
+			if(c == 'a') c = 'e';
+			break;
+		case 1:
+
+			break;
+		case 2:
+
+			break;
+		case 3:
+
+			break;
+		default:
+			break;
+		}
+	}
+	j++;
+	write(1, &c, 1);
+	if((pid = fork()) != 0) exit(0);
 }
