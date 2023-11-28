@@ -29,7 +29,18 @@ void main(int args, char *argv[])
 {
     int i, m, n, pid, stat, exitstat, acum = 0, fd, ctrlfd;
     int nbytes, len;
+    int8_t code;
     char buffy[255], buf[255];
+
+    if (!checkparams(args, argv)) // función del archivo checkparams.h, proviene del ejercicio inicial
+    {
+        usage(argv);
+    }
+    else
+    {
+        if (atoi(argv[1]) <= 0 || atoi(argv[2]) <= 0 || atoi(argv[2]) > 2000)
+            usage(argv);
+    }
 
     /*retorna el file descriptor del canal de control i verifica l'enigma i la clau*/
     ctrlfd = ctrlconnect(SERVADDR, CTRLPORT, ENIGMA3, TEAMNAME, SILVERKEY, GOLDKEY);
@@ -37,7 +48,7 @@ void main(int args, char *argv[])
 
     m = atoi(argv[1]);
     n = atoi(argv[2]);
-
+    // crea m fills
     for (i = 0; i < m; i++)
     {
         pid = fork();
@@ -51,11 +62,10 @@ void main(int args, char *argv[])
             execlp("./replicant", "replicant", argv[2], (char *)NULL);
         }
     }
-    int8_t code;
+
     // después de que se hayan ejecutado los hijos, el padre esperará a que terminen
     while ((wait(&stat) > 0))
     {
-
         code = WEXITSTATUS(stat);
         exitstat = code;
         acum += exitstat;
