@@ -23,7 +23,7 @@ int main(int args, char *argv[])
             if (bytes_leidos > 0)
             {
                 dummmy_calculate = dummy_calc(buffer, bytes_leidos);
-                 printf("\nBytes Leidos: %d, N: %d", bytes_leidos, N);
+                // printf("\nBytes Leidos: %d, N: %d", bytes_leidos, N);
             }
 
             bytes_leidos = read(0, buffer, N);
