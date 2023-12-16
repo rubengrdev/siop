@@ -3,53 +3,54 @@
 #include <stdlib.h>
 #include <signal.h>
 #include <sys/types.h>
+#include <fcntl.h>
 #include <sys/wait.h>
-int alarma=0;
-void
-error (char *msg)
+#include <stdbool.h>
+int alarma = 0;
+void error(char *msg)
 {
-  perror (msg);
-  exit (0);
+  perror(msg);
+  exit(0);
 }
 
-void
-crea_ps ()
+void f_alarma(int s)
 {
-  int pid;
-  pid = fork ();
-  if (pid == 0)
-    {
-      execlp ("ps", "ps", (char *) 0);
-      error ("execlp");
-    }
-  else if (pid < 0)
-    error ("fork");
+  alarma = 1;
 }
 
-void
-f_alarma (int s)
+void main(int argc, char *argv[])
 {
-	alarma=1;
-}
-void
-fin_hijo (int s)
-{
-	while (waitpid(-1,NULL,WNOHANG)>0);
-}
-
-void
-main (int argc, char *argv[])
-{
-  int x;
+  int x, i;
   x = 0;
-  signal (SIGALRM, f_alarma);
-  signal(SIGCHLD,fin_hijo);
-  while (x <10)
-    {
-      alarm (2);
-      while (alarma==0) pause ();
-      alarma=0;
-      crea_ps ();
-      x++;
+  int fd;
+  char line, frase[20];
+  bool busca_z = false;
+  signal(SIGALRM, f_alarma);
+
+  fd = open(argv[1], O_RDONLY);
+  i = 0;
+  while (read(fd, &line, 1) > 0)
+  {
+    if(i < 20) frase[i] = line;
+    
+    if(line == 'z'){
+      busca_z = true;
     }
+      //write(STDOUT_FILENO, &line, 1); // escricu per pantalla aquesta linea
+    i++;
+  }
+
+  while (x < 10)
+  {
+    alarm(2);
+    while (alarma == 0)
+    {
+      pause();
+    }
+    alarma = 0;
+    if(busca_z){
+      printf("\n%s",frase);
+    }
+    x++;
+  }
 }
