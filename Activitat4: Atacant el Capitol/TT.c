@@ -10,12 +10,12 @@
 
 #define SERVNAME "SIOP-server"
 #define SERVADDR "147.83.159.200"
-#define SERVPORT 9999
-#define CTRLPORT 9900
+#define SERVPORT 61219
+#define CTRLPORT 11219
 #define TEAMNAME "RUBENGOMEZ" // insert between "" your team name
 #define ENIGMA3 "mandalorian" // insert between "" solution of enigna 3
 #define SILVERKEY "ab15e"     // insert SILVERKEY between ""
-#define GOLDKEY ""            // use only for SIOP Challenge : insert GOLDKEY between "0xdbe9e"
+#define GOLDKEY "0xdbe9e"     // use only for SIOP Challenge : insert GOLDKEY between "0xdbe9e"
 
 /*Instrucció per resoldre l'enigma: openssl enc -aes-256-cbc -d -in encrypted_message.txt -out decrypted.txt -iv $(cat iv.txt) -K $(cat clue.txt)
  */
