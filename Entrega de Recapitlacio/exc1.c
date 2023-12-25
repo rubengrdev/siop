@@ -2,8 +2,9 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
+#include <stdbool.h>
 #define ASCII 128
-
+#define MAX 100
 /*
 Escriu un programa que llegeixi un text de l’entrada est`andard (teclat)
 l’encripti sumant-li l’ultim digit del seu PID al codi ASCII de cada car`acter,
@@ -19,39 +20,32 @@ return new_c;
 }
 */
 
-
 char codifica_caracter(char c, int key)
 {
     char new_c = (c + key) % ASCII;
     return new_c;
 }
 
-void main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
-    char *c;
-    int pid = getpid();
-    unsigned int key = 0;
+    char str[MAX];
+    char *new_str;
     unsigned int mida_cadena;
-    /*ja que el pid pot ser molt gran, fem modul a 10, així queda un número en forma d'unitat...*/
-    key = pid % 10;
-    do
-    {
-        key = pid % 10;
-    } while (key == 0); // si el pid és 0, la cadena no serà encriptada, i aixó no es correcte
-
-    mida_cadena = (sizeof(argv[1]) * sizeof(char));
-    // reserva memoria per la cadena (màxima de 100 caràcters), es pot modificar al header de l'arxiu
-    c = (char *)malloc(mida_cadena);
-
-    strcpy(c, argv[1]);
+    int key = getpid() % 10;
+    
+    fgets(str, MAX, stdin);  // Lee una línea completa
+    mida_cadena = strlen(str) * sizeof(char);
+    new_str = (char *)malloc(mida_cadena);
+    strcpy(new_str, str); // copiem la cadena de una mida acotada
     // encripta el text
-    for (int i = 0; i < sizeof(c); i++)
+    for (int i = 0; i < mida_cadena; i++)
     {
-        c[i] = codifica_caracter(c[i], key);
+        new_str[i] = codifica_caracter(new_str[i], key);
     }
-    // escriu el text encriptat
-    printf("\nCadena encriptada: %s", c);
 
-    // clau d'encriptacio:
+    write(1, new_str, mida_cadena); // escriu el text encriptat
+    
+    free(new_str);
     printf("\nKey: %d\n", key);
+    return 0;
 }
